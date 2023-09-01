@@ -1,7 +1,5 @@
-# Boruvka's algorithm to find Minimum Spanning
-# Tree of a given connected, undirected and weighted graph
-
 from collections import defaultdict
+import unittest
 
 class Graph:
     def __init__(self, vertices):
@@ -61,17 +59,29 @@ class Graph:
 
             cheapest = [-1] * self.V
 
-        print(f"Weight of MST is {MSTweight}")
+        return MSTweight  # Return MST weight as a result
 
+# Unit tests for Boruvka's algorithm
+class TestBoruvkaMST(unittest.TestCase):
+    def test_boruvkaMST(self):
+        g = Graph(4)
+        g.addEdge(0, 1, 10)
+        g.addEdge(0, 2, 6)
+        g.addEdge(0, 3, 5)
+        g.addEdge(1, 3, 15)
+        g.addEdge(2, 3, 4)
 
-g = Graph(4)
-g.addEdge(0, 1, 10)
-g.addEdge(0, 2, 6)
-g.addEdge(0, 3, 5)
-g.addEdge(1, 3, 15)
-g.addEdge(2, 3, 4)
+        # Capture the MST weight by calling the boruvkaMST method
+        mst_weight = g.boruvkaMST()
 
-g.boruvkaMST()
+        # Assert the expected MST weight
+        expected_weight = 19  # Adjust this to the correct expected weight
+        self.assertEqual(mst_weight, expected_weight)
+
+    #def test_disconnected_graph(self):
+        # ... (other test cases)
+if __name__ == '__main__':
+    unittest.main()
 
 
 #Class to represent a graph
